@@ -14,6 +14,7 @@ import com.openhtmltopdf.nonvisualregressiontests.NonVisualRegressionTest;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.openhtmltopdf.util.OpenUtil;
 import com.openhtmltopdf.visualtest.VisualTester.BuilderConfig;
+import org.apache.pdfbox.Loader;
 
 public class NonVisualTestSupport {
     public static class TestDocument implements Closeable {
@@ -93,6 +94,6 @@ public class NonVisualTestSupport {
     }
 
     private PDDocument load(String filename) throws IOException {
-        return PDDocument.load(new File(outPath, filename + ".pdf"));
+        return Loader.loadPDF(new File(outPath, filename + ".pdf"));
     }
 }

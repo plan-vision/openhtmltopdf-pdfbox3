@@ -159,16 +159,21 @@ public class PdfBoxPerDocumentFormState {
                 frm.addControl(ctrl, fontName);
             }
         }
-        
-        PDResources resources = new PDResources(); 
+
+
+        PDResources resources = new PDResources();
+        /* Defaultfonts */
+        resources.put(COSName.HELV, PDType1Font.HELVETICA);
+        resources.put(COSName.ZA_DB, PDType1Font.ZAPF_DINGBATS);
         for (Map.Entry<PDFont, String> fnt : controlFonts.entrySet()) {
             resources.put(COSName.getPDFName(fnt.getValue()), fnt.getKey());
         }
-        
+
         if (forms.size() != 0) {
             int start = 0;
             PDAcroForm acro = new PDAcroForm(writer);
 
+            acro.setDefaultAppearance("/Helv 0 Tf 0 g");
             acro.setNeedAppearances(Boolean.TRUE);
             acro.setDefaultResources(resources);
         

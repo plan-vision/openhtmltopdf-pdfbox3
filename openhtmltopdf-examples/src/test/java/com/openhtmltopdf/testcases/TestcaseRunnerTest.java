@@ -1,6 +1,7 @@
 package com.openhtmltopdf.testcases;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.Loader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,7 @@ public class TestcaseRunnerTest {
     private void confirmPages(String filename, int expectedPages) throws IOException {
         File pdf = new File(targetDirectory, filename + ".pdf");
 
-        try (PDDocument doc = PDDocument.load(pdf)) {
+        try (PDDocument doc = Loader.loadPDF(pdf)) {
             assertEquals(expectedPages, doc.getNumberOfPages());
         }
     }
@@ -231,12 +232,12 @@ public class TestcaseRunnerTest {
         runTestCase(test);
         confirmPages(test, 3);
     }
-
+    
     @Test
     public void testMultipageTable() throws IOException {
-        String test = "multipage-table";
+         String test = "multipage-table";
         runTestCase(test);
         confirmPages(test, 4);
     }
-    
+
 }
